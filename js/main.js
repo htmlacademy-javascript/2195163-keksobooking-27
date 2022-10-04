@@ -1,7 +1,10 @@
-function randomNumber(min, max) {
-    if (min < 0 || max < 0) {
-        return NaN;
+const getRandomNumber = (min, max) => {
+    if (min < 0 || max < 0 || max === min) {
+        return NaN
     }
+    if (min > max) {
+        [min, max] = [max, min]
+    }
+    return Math.floor(Math.random() * (max - min + 1)) + min
 }
-return Math.floor(Math.random() * (max - min)) + min
-randomNumber()
+getRandomNumber();

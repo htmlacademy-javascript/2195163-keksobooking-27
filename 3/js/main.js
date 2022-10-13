@@ -35,16 +35,15 @@ const getRandomNumber = (min, max, count = 0) => {
 };
 
 const shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i++) {
+  for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
 };
 
-const getNewArray = (array) => {
-  const newArray = shuffleArray(array).slice(0,getRandomNumber(1, array.length));
-};
+const getNewArray = (array) => shuffleArray(array).slice(0,getRandomNumber(1, array.length));
+ 
 
 const getRandomArrayElement = (arr) => {
   let i = getRandomNumber(0, arr.length - 1);

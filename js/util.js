@@ -1,11 +1,17 @@
 const getRandomNumber = (min, max, count = 0) => {
-  if (min < 0 || max < 0 || max === min) {
+  if (min < 0 || max < 0 || min === max) {
     return NaN;
   }
+
   if (min > max) {
     [min, max] = [max, min];
   }
-  return +(Math.random() * (max - min) + min).toFixed(count);
+
+  if (count) {
+    return +(Math.random() * (max - min) + min).toFixed(count);
+  }
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 const getRandomArrayElement = (arr) => {
@@ -24,4 +30,7 @@ const shuffleArray = (array) => {
   return array;
 };
 
-export { getRandomNumber, shuffleArray, getRandomArrayElement };
+const getNewArray = (array) =>
+  shuffleArray(array).slice(0, getRandomNumber(1, array.length));
+
+export { getRandomNumber, shuffleArray, getRandomArrayElement, getNewArray };

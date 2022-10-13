@@ -34,6 +34,18 @@ const getRandomNumber = (min, max, count = 0) => {
   return +(Math.random() * (max - min) + min).toFixed(count);
 };
 
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i++) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
+
+const getNewArray = (array) => {
+  const newArray = shuffleArray(array).slice(0,getRandomNumber(1, array.length));
+};
+
 const getRandomArrayElement = (arr) => {
   let i = getRandomNumber(0, arr.length - 1);
   if (i === arr.length) {
@@ -41,8 +53,6 @@ const getRandomArrayElement = (arr) => {
   }
   return arr[i];
 };
-
-const getNewArray = (array) => array[getRandomNumber(0, array.length - 1)];
 
 const createAvatar = () => {
   let index = getRandomNumber(1, 10);
@@ -70,14 +80,13 @@ const createOffer = () => {
       quests: getRandomNumber(1, 6),
       checkin: getRandomArrayElement(CHECK_TIMES),
       checkout: getRandomArrayElement(CHECK_TIMES),
-      features: FEATURES.slice(0, getRandomNumber(0, FEATURES.length)),
+      features: getNewArray(FEATURES),
       description: getRandomArrayElement(DESCRIPTIONS),
-      photos: Array.from({ length: getRandomNumber(1, 10) }, () =>
-        getNewArray(PHOTOS)
-      ),
+      photos: getNewArray(PHOTOS),
     },
     location,
   };
 };
 
 const randomRoom = Array.from({ length: RANDOM_OFFER_COUNT }, createOffer);
+

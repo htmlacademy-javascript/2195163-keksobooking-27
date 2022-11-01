@@ -40,7 +40,7 @@ const createAvatar = () => {
   if (index < 10) {
     index = `0${index}`;
   }
-  return `img/avatars/user/${index}.png`;
+  return `img/avatars/user${index}.png`;
 };
 
 const RANDOM_OFFER_COUNT = 10;
@@ -60,7 +60,7 @@ const createOffer = () => {
       price: getRandomNumber(10000, 100000),
       type: getRandomArrayElement(TYPES_OF_BUILDING),
       rooms: getRandomNumber(1, 4),
-      quests: getRandomNumber(1, 6),
+      guests: getRandomNumber(1, 6),
       checkin: getRandomArrayElement(CHECK_TIMES),
       checkout: getRandomArrayElement(CHECK_TIMES),
       features: getNewArray(FEATURES),

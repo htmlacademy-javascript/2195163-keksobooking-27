@@ -1,38 +1,38 @@
-import { getRandomArrayElement, getRandomNumber, getNewArray } from "./util.js";
+import { getRandomArrayElement, getRandomNumber, getNewArray } from './util.js';
 
 const TYPES_OF_BUILDING = [
-  "palace",
-  "flat",
-  "house",
-  "bungalow",
-  "hotel",
+  'palace',
+  'flat',
+  'house',
+  'bungalow',
+  'hotel',
 ];
 
-const CHECK_TIMES = ["12:00", "13:00", "14:00"];
+const CHECK_TIMES = ['12:00', '13:00', '14:00'];
 
 const FEATURES = [
-  "wifi",
-  "dishwasher",
-  "parking",
-  "washer",
-  "elevator",
-  "conditioner",
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
 ];
 
 const PHOTOS = [
-  "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg",
-  "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg",
-  "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg",
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const TITLES = ["Квартира", "Дом", "Лофт", "Дача"];
- 
+const TITLES = ['Квартира', 'Дом', 'Лофт', 'Дача'];
+
 const DESCRIPTIONS = [
-  "Шикарноый вид из окна",
-  "Отличный ремонт",
-  "Есть вся мебель",
-  "Есть вся техника для уютного проживания",
-  "Хорошие соседи",
+  'Шикарноый вид из окна',
+  'Отличный ремонт',
+  'Есть вся мебель',
+  'Есть вся техника для уютного проживания',
+  'Хорошие соседи',
 ];
 
 const createAvatar = () => {
@@ -40,7 +40,7 @@ const createAvatar = () => {
   if (index < 10) {
     index = `0${index}`;
   }
-  return `img/avatars/user/${index}.png`;
+  return `img/avatars/user${index}.png`;
 };
 
 const RANDOM_OFFER_COUNT = 10;
@@ -60,7 +60,7 @@ const createOffer = () => {
       price: getRandomNumber(10000, 100000),
       type: getRandomArrayElement(TYPES_OF_BUILDING),
       rooms: getRandomNumber(1, 4),
-      quests: getRandomNumber(1, 6),
+      guests: getRandomNumber(1, 6),
       checkin: getRandomArrayElement(CHECK_TIMES),
       checkout: getRandomArrayElement(CHECK_TIMES),
       features: getNewArray(FEATURES),

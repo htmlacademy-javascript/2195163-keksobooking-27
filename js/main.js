@@ -1,3 +1,6 @@
-import { createOffers } from './create-offers.js';
+import {renderCard} from './render-card.js';
+import {createOffers} from './create-offers.js';
 
-console.log(createOffers());
+const offer = createOffers()[0];
+console.log(offer);
+renderCard(offer);

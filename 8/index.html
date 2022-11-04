@@ -105,9 +105,9 @@
           <label class="ad-form__label" for="type">Тип жилья</label>
           <select id="type" name="type">
             <option value="bungalow">Бунгало</option>
-            <option value="flat" selected>Квартира</option>
+            <option value="flat" >Квартира</option>
             <option value="hotel">Отель</option>
-            <option value="house">Дом</option>
+            <option value="house" selected>Дом</option>
             <option value="palace">Дворец</option>
           </select>
         </fieldset>
@@ -115,10 +115,10 @@
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
           <input id="price" name="price" type="number" placeholder="5000"
           number
-          min='0'
           max='100000'
           data-pristine-required-message='Это поле должно быть заполнено'
-          data-pristine-max-message="100000"
+          data-pristine-max-message="Цена выбранного типа жилья не более 100000 рублей за ночь"
+          data-pristine-min-message="5000"
           required
           >
           <div class="ad-form__slider"></div>

@@ -1,7 +1,16 @@
 const adForm = document.querySelector('.ad-form');
 const capacityItem = document.querySelector('#capacity');
 const roomNumberItem = document.querySelector('#room_number');
+const priceList = document.querySelector('#price');
+const typeList = document.querySelector('#type');
 
+const minPrice = {
+  'bungalow': 0,
+  'flat': 1000,
+  'hotel': 3000,
+  'house': 5000,
+  'palace': 10000,
+};
 const roomsToGuests = {
   1: ['1'],
   2: ['1', '2'],
@@ -25,6 +34,17 @@ const pristine = new Pristine(
   },
   true,
 );
+
+const getTypeChange = () => {
+  priceList.placeholder = minPrice[typeList.value];
+  priceList.min = minPrice[typeList.value];
+  priceList.dataset.pristineMinMessage = `минимальное значение ${minPrice[typeList.value]}`;
+};
+
+
+typeList.addEventListener('change', getTypeChange);
+priceList.addEventListener('change', getTypeChange);
+
 
 const validateCapacity = () => roomsToGuests[roomNumberItem.value].includes(capacityItem.value);
 

@@ -1,8 +1,8 @@
 const adForm = document.querySelector('.ad-form');
-const capacityItem = document.querySelector('#capacity');
-const roomNumberItem = document.querySelector('#room_number');
-const priceList = document.querySelector('#price');
-const typeList = document.querySelector('#type');
+const capacitySelect = document.querySelector('#capacity');
+const roomNumberSelect = document.querySelector('#room_number');
+const priceInput = document.querySelector('#price');
+const typeSelect = document.querySelector('#type');
 
 const minPrice = {
   'bungalow': 0,
@@ -35,41 +35,41 @@ const pristine = new Pristine(
   true,
 );
 
-const getTypeChange = () => {
-  priceList.placeholder = minPrice[typeList.value];
-  priceList.min = minPrice[typeList.value];
-  priceList.dataset.pristineMinMessage = `минимальное значение ${minPrice[typeList.value]}`;
-};
-
-
-typeList.addEventListener('change', getTypeChange);
-priceList.addEventListener('change', getTypeChange);
-
-
-const validateCapacity = () => roomsToGuests[roomNumberItem.value].includes(capacityItem.value);
+const validateCapacity = () => roomsToGuests[roomNumberSelect.value].includes(capacitySelect.value);
 
 const getCapacityErrorMessage = () =>
-  `Указанное количество комнта вмещает ${roomsToGuests[roomNumberItem.value].join(' или ')} комнаты.`;
+  `Указанное количество комнта вмещает ${roomsToGuests[roomNumberSelect.value].join(' или ')} комнаты.`;
 
 const getRoomNumberErrorMessage = () =>
-  `Для указанного количества гостей требуется ${guestsToRooms[capacityItem.value].join(' или ')} комнаты.`;
+  `Для указанного количества гостей требуется ${guestsToRooms[capacitySelect.value].join(' или ')} комнаты.`;
 
-const onCapacityItemChange = () => {
-  pristine.validate(capacityItem);
-  pristine.validate(roomNumberItem);
+const getPriceErrorMessage = () => `Цена выбранного типа жилья не менее ${minPrice[typeSelect.value]} рублей за ночь`;
+
+/*const onPriceInputInput = () => {
+  pristine.validate(priceInput);
+};*/
+function validatePrice () {
+  return Number(priceInput.value) > Number(minPrice[typeSelect.value]);
+}
+
+
+const onCapacitySelectChange = () => {
+  pristine.validate(capacitySelect);
+  pristine.validate(roomNumberSelect);
 };
 
-const onRoomNumberItemChange = () => {
-  pristine.validate(capacityItem);
-  pristine.validate(roomNumberItem);
+const onRoomNumberSelectChange = () => {
+  pristine.validate(capacitySelect);
+  pristine.validate(roomNumberSelect);
 };
 
-capacityItem.addEventListener('change', onCapacityItemChange);
-roomNumberItem.addEventListener('change', onRoomNumberItemChange);
+//priceInput.addEventListener('input', onPriceInputInput);
+capacitySelect.addEventListener('change', onCapacitySelectChange);
+roomNumberSelect.addEventListener('change', onRoomNumberSelectChange);
 
-pristine.addValidator(capacityItem, validateCapacity, getCapacityErrorMessage);
-
-pristine.addValidator(roomNumberItem, validateCapacity, getRoomNumberErrorMessage);
+pristine.addValidator(priceInput, validatePrice, getPriceErrorMessage);
+pristine.addValidator(capacitySelect, validateCapacity, getCapacityErrorMessage);
+pristine.addValidator(roomNumberSelect, validateCapacity, getRoomNumberErrorMessage);
 
 const validateForm = () => pristine.validate();
 

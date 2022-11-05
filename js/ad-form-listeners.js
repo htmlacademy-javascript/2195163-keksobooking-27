@@ -28,9 +28,6 @@ const onAddFormSubmit = (evt) => {
   if (validateForm()) {}
 };
 
-/*typeSelect.addEventListener('change', getTypeChange);
-priceItem.addEventListener('change', getTypeChange);*/
-
 const setAdFormListeners = () => {
   adForm.addEventListener('submit', onAddFormSubmit);
   timeInItem.addEventListener('change', onTimeInItemChange);

@@ -47,10 +47,8 @@ const getPriceErrorMessage = () => `Цена выбранного типа жи�
 
 /*const onPriceInputInput = () => {
   pristine.validate(priceInput);
-};*/
-function validatePrice () {
-  return Number(priceInput.value) > Number(minPrice[typeSelect.value]);
-}
+};   Как я понимаю это не нужно?*/
+const validatePrice = () => Number(priceInput.value) >= Number(minPrice[typeSelect.value]);
 
 
 const onCapacitySelectChange = () => {
@@ -63,7 +61,7 @@ const onRoomNumberSelectChange = () => {
   pristine.validate(roomNumberSelect);
 };
 
-//priceInput.addEventListener('input', onPriceInputInput);
+//priceInput.addEventListener('input', onPriceInputInput); Как я понимаю это не нужно?
 capacitySelect.addEventListener('change', onCapacitySelectChange);
 roomNumberSelect.addEventListener('change', onRoomNumberSelectChange);
 

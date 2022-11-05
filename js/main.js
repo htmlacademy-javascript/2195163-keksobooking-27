@@ -1,11 +1,21 @@
-import {renderCard} from './render-card.js';
 import {createOffers} from './create-offers.js';
-import {deactivateForms, activateForms} from './forms-states.js';
+import {deactivateForms, activateForms, setAdress} from './forms-states.js';
 import {setAdFormListeners} from './ad-form-listeners.js';
+import {initMap, setOnMapLoad, setOnMainPinMove, setAdPins} from './create-map.js';
 
-const offer = createOffers()[0];
-renderCard(offer);
+const offer = createOffers();
+
 deactivateForms();
-activateForms();
 setAdFormListeners();
+const startCoordinate = {
+  lat: 35.66023,
+  lng: 139.73007,
+};
 
+setOnMapLoad(()=> {
+  setOnMainPinMove(setAdress);
+  setAdress(startCoordinate);
+  activateForms();
+  setAdPins(offer);
+});
+initMap(startCoordinate);

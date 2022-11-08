@@ -28,9 +28,4 @@ const deactivateForms = () => {
   deactivateFiltersForm();
 };
 
-const activateForms = () => {
-  activateAdForm();
-  activateFiltersForm();
-};
-
-export {deactivateForms, activateForms};
+export {deactivateForms, activateAdForm, activateFiltersForm};

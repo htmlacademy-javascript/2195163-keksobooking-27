@@ -2,8 +2,6 @@ const adForm = document.querySelector('.ad-form');
 const filtersForm = document.querySelector('.map__filters');
 const adFormInteractiveItems = adForm.querySelectorAll('fieldset');
 const filtersFormInteractiveItems = filtersForm.querySelectorAll('fieldset, select');
-const adress = document.querySelector('#address');
-
 
 const deactivateAdForm = () => {
   adForm.classList.add('ad-form--disabled');
@@ -30,15 +28,4 @@ const deactivateForms = () => {
   deactivateFiltersForm();
 };
 
-const activateForms = () => {
-  activateAdForm();
-  activateFiltersForm();
-};
-
-const numberPoint = 5;
-
-const setAdress = (coordinates) => {
-  adress.value = `${coordinates.lat.toFixed(numberPoint)}, ${coordinates.lng.toFixed(numberPoint)}`;
-};
-
-export {deactivateForms, activateForms, setAdress};
+export {deactivateForms, activateAdForm, activateFiltersForm};

@@ -65,6 +65,7 @@ pristine.addValidator(priceInput, validatePrice, getPriceErrorMessage);
 pristine.addValidator(capacitySelect, validateCapacity, getCapacityErrorMessage);
 pristine.addValidator(roomNumberSelect, validateCapacity, getRoomNumberErrorMessage);
 
+
 const validateForm = () => pristine.validate();
 
 export {validateForm};

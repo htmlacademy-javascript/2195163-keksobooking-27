@@ -1,7 +1,6 @@
 import {activateAdForm, activateFiltersForm} from './forms-states.js';
 import {renderCard} from './render-card.js';
 import {setAdFormListeners} from './ad-form-listeners.js';
-import {createOffers} from './create-offers.js';
 import {initSlider} from './slider.js';
 
 const START_LOCATION = {
@@ -11,8 +10,6 @@ const START_LOCATION = {
 
 const DECIMALS = 5;
 const MAP_ZOOM = 12;
-
-const data = createOffers();
 
 const addressInput = document.querySelector('#address');
 const interactiveMap = L.map('map-canvas');
@@ -30,7 +27,7 @@ const setLocation = (target) => {
   addressInput.value = `${location.lat.toFixed(DECIMALS)}, ${location.lng.toFixed(DECIMALS)}`;
 };
 
-const addMarkerGroup = () => {
+const addMarkerGroup = (data) => {
   markerGroup.addTo(interactiveMap);
   data.forEach((offer) => {
     marker = L.marker(offer.location, {
@@ -46,18 +43,18 @@ const addMarkerGroup = () => {
 
 const onMarkerMove = (evt) => setLocation(evt.target);
 
-const setAdFormStartState = () => {
+const setAdFormStartState = (data) => {
   activateAdForm();
   setAdFormListeners();
   setStartAddressValue();
   initSlider();
-  addMarkerGroup();
+  addMarkerGroup(data);
 };
 
-const initMap = () => {
+const initMap = (data) => {
   interactiveMap
     .on('load', () => {
-      setAdFormStartState();
+      setAdFormStartState(data);
       activateFiltersForm();
     })
     .setView(START_LOCATION, MAP_ZOOM);
@@ -79,4 +76,11 @@ const initMap = () => {
   interactiveMarker.on('move', onMarkerMove);
 };
 
-export {initMap};
+const resetMap = () => {
+  if(interactiveMarker) {
+    interactiveMarker.remove();
+  }
+  initMap();
+  addressInput.value = `${START_LOCATION.lat}, ${START_LOCATION.lng}`;
+};
+export {initMap, resetMap};

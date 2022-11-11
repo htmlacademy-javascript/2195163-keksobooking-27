@@ -30,4 +30,6 @@ const initSlider = () => {
   addSliderListeners();
 };
 
-export {initSlider};
+const sliderReset = () => slider.noUiSlider.reset();
+
+export {initSlider, sliderReset};

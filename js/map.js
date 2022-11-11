@@ -83,4 +83,5 @@ const resetMap = () => {
   initMap();
   addressInput.value = `${START_LOCATION.lat}, ${START_LOCATION.lng}`;
 };
+
 export {initMap, resetMap};

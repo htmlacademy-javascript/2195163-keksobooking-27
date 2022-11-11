@@ -42,7 +42,7 @@ const pristine = new Pristine(
 const validateCapacity = () => roomsToGuests[roomNumberSelect.value].includes(capacitySelect.value);
 
 const getCapacityErrorMessage = () =>
-  `Указанное количество комнта вмещает ${roomsToGuests[roomNumberSelect.value].join(' или ')} комнаты.`;
+  `Указанное количество комнта вмещает ${roomsToGuests[roomNumberSelect.value].join(' или ')} гостей.`;
 
 const getRoomNumberErrorMessage = () =>
   `Для указанного количества гостей требуется ${guestsToRooms[capacitySelect.value].join(' или ')} комнаты.`;

@@ -1,17 +1,18 @@
+const GET_URL = 'https://27.javascript.pages.academy/keksobooking/data';
+const SEND_URL = 'https://27.javascript.pages.academy/keksobooking';
+
 const getData = (onSuccess, onFail) => {
-  fetch('https://27.javascript.pages.academy/keksobooking/data')
+  fetch(GET_URL)
     .then((response) => response.json())
-    .then((offers) => {
-      onSuccess(offers);
-    })
+    .then((data) => onSuccess(data))
     .catch(() => {
-      onFail('Не удалось получить данные');
+      onFail('Не удалось получить данные. Попробуйте ещё раз');
     });
 };
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://27.javascript.pages.academy/keksobooking',
+    SEND_URL,
     {
       method: 'POST',
       body,
@@ -21,14 +22,12 @@ const sendData = (onSuccess, onFail, body) => {
       if (response.ok) {
         onSuccess();
       } else {
-        onFail ('Не удалось установить соединение с сервером. Попробуйте ещё раз');
+        onFail('Не удалось отправить форму. Попробуйте ещё раз');
       }
-    }
-    )
+    })
     .catch(() => {
-      onFail ('Не удалось отправить форму. Попробуйте ещё раз');
+      onFail('Не удалось отправить форму. Попробуйте ещё раз');
     });
 };
 
-
-export { getData, sendData };
+export {getData, sendData};

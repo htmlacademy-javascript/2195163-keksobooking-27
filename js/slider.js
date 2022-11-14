@@ -1,4 +1,3 @@
-import { pristine } from './validate-ad-form.js';
 const slider = document.querySelector('.ad-form__slider');
 const priceField = document.querySelector('#price');
 
@@ -8,7 +7,7 @@ const createSlider = () => {
       min: 0,
       max: Number(priceField.max),
     },
-    start: 1000,
+    start: 5000,
     step: 1,
     connect: 'lower',
     format: {
@@ -25,18 +24,10 @@ const addSliderListeners = () => {
   slider.noUiSlider.on('update', onSliderInputUpdate);
   priceField.addEventListener('change', onInputSliderChange);
 };
-const validateSlider = () => {
-  slider.noUiSlider.on('update', () => {
-    priceField.value = slider.noUiSlider.get();
-    pristine.validate(priceField);
-  });
-};
+
 const initSlider = () => {
   createSlider();
   addSliderListeners();
-  validateSlider();
 };
 
-const sliderReset = () => slider.noUiSlider.reset();
-
-export {initSlider, sliderReset};
+export {initSlider};

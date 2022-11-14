@@ -1,12 +1,8 @@
-import {sendData} from './api.js';
-import {updateMap} from './ad-form-listeners.js';
-import { showSuccessMessage, showErrorMessage } from './popup-notification.js';
 const adForm = document.querySelector('.ad-form');
 const capacitySelect = document.querySelector('#capacity');
 const roomNumberSelect = document.querySelector('#room_number');
 const priceInput = document.querySelector('#price');
 const typeSelect = document.querySelector('#type');
-const submitButton = document.querySelector('.ad-form__submit');
 
 const minPrice = {
   'bungalow': 0,
@@ -42,7 +38,7 @@ const pristine = new Pristine(
 const validateCapacity = () => roomsToGuests[roomNumberSelect.value].includes(capacitySelect.value);
 
 const getCapacityErrorMessage = () =>
-  `Указанное количество комнта вмещает ${roomsToGuests[roomNumberSelect.value].join(' или ')} гостей.`;
+  `Указанное количество комнта вмещает ${roomsToGuests[roomNumberSelect.value].join(' или ')} комнаты.`;
 
 const getRoomNumberErrorMessage = () =>
   `Для указанного количества гостей требуется ${guestsToRooms[capacitySelect.value].join(' или ')} комнаты.`;
@@ -61,7 +57,6 @@ const onRoomNumberSelectChange = () => {
   pristine.validate(roomNumberSelect);
 };
 
-
 capacitySelect.addEventListener('change', onCapacitySelectChange);
 roomNumberSelect.addEventListener('change', onRoomNumberSelectChange);
 
@@ -69,45 +64,8 @@ pristine.addValidator(priceInput, validatePrice, getPriceErrorMessage);
 pristine.addValidator(capacitySelect, validateCapacity, getCapacityErrorMessage);
 pristine.addValidator(roomNumberSelect, validateCapacity, getRoomNumberErrorMessage);
 
-const blockSubmitButton = () => {
-  submitButton.disabled = true;
-  submitButton.textContent = 'Сохраняю...';
-};
-
-const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = 'Сохранить';
-};
-
-const onSendSuccess = () => {
-  showSuccessMessage();
-  updateMap();
-  unblockSubmitButton();
-};
-
-const onSendError = () => {
-  showErrorMessage();
-  unblockSubmitButton();
-};
-
-const setUserFormSubmit = () => {
-  adForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const isValid = pristine.validate();
-
-    if (isValid) {
-      blockSubmitButton();
-      sendData(
-        onSendSuccess,
-        onSendError,
-        new FormData(evt.target),
-      );
-    }
-  });
-};
-
 
 const validateForm = () => pristine.validate();
+const resetValidation = () => pristine.reset();
 
-
-export {validateForm, setUserFormSubmit, pristine};
+export {validateForm, resetValidation};

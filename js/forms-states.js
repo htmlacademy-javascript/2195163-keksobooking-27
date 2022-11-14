@@ -28,9 +28,4 @@ const deactivateForms = () => {
   deactivateFiltersForm();
 };
 
-const resetFilters = () => {
-  adForm.reset();
-  filtersForm.reset();
-};
-
-export {deactivateForms, activateAdForm, activateFiltersForm, resetFilters};
+export {deactivateForms, activateAdForm, activateFiltersForm};

@@ -1,8 +1,8 @@
-import {activateAdForm, activateFiltersForm} from './forms-states.js';
+import {renderGetErrorMessage} from './error.js';
+import {getData} from './api.js';
+import {activateFiltersForm} from './forms-states.js';
 import {renderCard} from './render-card.js';
-import {setAdFormListeners} from './ad-form-listeners.js';
-import {createOffers} from './create-offers.js';
-import {initSlider} from './slider.js';
+import {setAdFormAction} from './ad-form-action.js';
 
 const START_LOCATION = {
   lat: 35.68172,
@@ -11,8 +11,7 @@ const START_LOCATION = {
 
 const DECIMALS = 5;
 const MAP_ZOOM = 12;
-
-const data = createOffers();
+const OFFERS_COUNTER = 10;
 
 const addressInput = document.querySelector('#address');
 const interactiveMap = L.map('map-canvas');
@@ -30,35 +29,44 @@ const setLocation = (target) => {
   addressInput.value = `${location.lat.toFixed(DECIMALS)}, ${location.lng.toFixed(DECIMALS)}`;
 };
 
-const addMarkerGroup = () => {
+const addMarkerGroup = (data) => {
   markerGroup.addTo(interactiveMap);
-  data.forEach((offer) => {
-    marker = L.marker(offer.location, {
-      icon: L.icon({
-        iconUrl: './img/pin.svg',
-        iconSize: [40, 40],
-        iconAnchor: [20, 40],
-      }),
+  data
+    .slice(0, OFFERS_COUNTER)
+    .forEach((offer) => {
+      marker = L.marker(offer.location, {
+        icon: L.icon({
+          iconUrl: './img/pin.svg',
+          iconSize: [40, 40],
+          iconAnchor: [20, 40],
+        }),
+      });
+      marker.addTo(markerGroup).bindPopup(renderCard(offer));
     });
-    marker.addTo(markerGroup).bindPopup(renderCard(offer));
-  });
 };
 
 const onMarkerMove = (evt) => setLocation(evt.target);
 
 const setAdFormStartState = () => {
-  activateAdForm();
-  setAdFormListeners();
+  setAdFormAction();
   setStartAddressValue();
-  initSlider();
-  addMarkerGroup();
+};
+
+const resetMap = () => {
+  interactiveMarker.setLatLng(START_LOCATION);
+  interactiveMap.setView(START_LOCATION, MAP_ZOOM);
+};
+
+const getDataCallback = (data) => {
+  activateFiltersForm();
+  addMarkerGroup(data);
 };
 
 const initMap = () => {
   interactiveMap
     .on('load', () => {
       setAdFormStartState();
-      activateFiltersForm();
+      getData(getDataCallback, renderGetErrorMessage);
     })
     .setView(START_LOCATION, MAP_ZOOM);
 
@@ -79,4 +87,4 @@ const initMap = () => {
   interactiveMarker.on('move', onMarkerMove);
 };
 
-export {initMap};
+export {initMap, setStartAddressValue, resetMap};

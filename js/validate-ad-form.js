@@ -57,7 +57,6 @@ const onRoomNumberSelectChange = () => {
   pristine.validate(roomNumberSelect);
 };
 
-
 capacitySelect.addEventListener('change', onCapacitySelectChange);
 roomNumberSelect.addEventListener('change', onRoomNumberSelectChange);
 
@@ -67,5 +66,6 @@ pristine.addValidator(roomNumberSelect, validateCapacity, getRoomNumberErrorMess
 
 
 const validateForm = () => pristine.validate();
+const resetValidation = () => pristine.reset();
 
-export {validateForm};
+export {validateForm, resetValidation};

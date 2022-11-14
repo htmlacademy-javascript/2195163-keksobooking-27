@@ -7,7 +7,7 @@ const createSlider = () => {
       min: 0,
       max: Number(priceField.max),
     },
-    start: 1000,
+    start: 5000,
     step: 1,
     connect: 'lower',
     format: {

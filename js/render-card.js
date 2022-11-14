@@ -54,7 +54,7 @@ const createCapacityText = (offer) => {
 
 const renderPhotoBlock = (parent, cssClass, data) => {
   const element = parent.querySelector(cssClass);
-  if (!data.length) {
+  if (!data) {
     element.remove();
     return;
   }
@@ -69,7 +69,7 @@ const renderPhotoBlock = (parent, cssClass, data) => {
 
 const renderFeaturesBlock = (parent, cssClass, data) => {
   const element = parent.querySelector(cssClass);
-  if (!data.length) {
+  if (!data) {
     element.remove();
     return;
   }

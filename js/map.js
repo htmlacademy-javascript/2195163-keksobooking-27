@@ -3,6 +3,8 @@ import {getData} from './api.js';
 import {activateFiltersForm} from './forms-states.js';
 import {renderCard} from './render-card.js';
 import {setAdFormAction} from './ad-form-action.js';
+import {filterOffers, onFiltersChange} from './ad-filter.js';
+import {debounce} from './util.js';
 
 const START_LOCATION = {
   lat: 35.68172,
@@ -47,9 +49,36 @@ const addMarkerGroup = (data) => {
 
 const onMarkerMove = (evt) => setLocation(evt.target);
 
+const onDataFailed = () => {
+  const mapForm = document.querySelector('.map__filters');
+  const mapFormSelects = mapForm.querySelectorAll('select');
+  const mapFormFieldsets = mapForm.querySelectorAll('fieldset');
+  mapForm.classList.add('map__filters--disabled');
+  renderGetErrorMessage();
+  activateFiltersForm(mapFormSelects, false);
+  activateFiltersForm(mapFormFieldsets, false);
+};
+
+
+const onDataLoad = (data) => {
+  const filteredOffers = filterOffers(data);
+  addMarkerGroup(filteredOffers.slice(0, 10));
+};
+
+const setFilteredMarkers = () => {
+  getData((offers) => {
+    onDataLoad(offers);
+    onFiltersChange(debounce(() => {
+      markerGroup.clearLayers();
+      onDataLoad(offers);
+    }));
+  }, onDataFailed);
+};
+
 const setAdFormStartState = () => {
   setAdFormAction();
   setStartAddressValue();
+  setFilteredMarkers();
 };
 
 const resetMap = () => {
@@ -86,5 +115,6 @@ const initMap = () => {
 
   interactiveMarker.on('move', onMarkerMove);
 };
+
 
 export {initMap, setStartAddressValue, resetMap};

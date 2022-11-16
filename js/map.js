@@ -78,7 +78,6 @@ const setFilteredMarkers = () => {
 const setAdFormStartState = () => {
   setAdFormAction();
   setStartAddressValue();
-  setFilteredMarkers();
 };
 
 const resetMap = () => {
@@ -87,6 +86,7 @@ const resetMap = () => {
 };
 
 const getDataCallback = (data) => {
+  setFilteredMarkers();
   activateFiltersForm();
   addMarkerGroup(data);
 };

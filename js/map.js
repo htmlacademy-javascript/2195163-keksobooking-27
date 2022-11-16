@@ -62,7 +62,7 @@ const onDataFailed = () => {
 
 const onDataLoad = (data) => {
   const filteredOffers = filterOffers(data);
-  addMarkerGroup(filteredOffers.slice(0, 10));
+  addMarkerGroup(filteredOffers.slice(0, OFFERS_COUNTER));
 };
 
 const setFilteredMarkers = () => {
@@ -88,7 +88,7 @@ const resetMap = () => {
 const getDataCallback = (data) => {
   setFilteredMarkers();
   activateFiltersForm();
-  addMarkerGroup(data);
+  onDataLoad(data);
 };
 
 const initMap = () => {

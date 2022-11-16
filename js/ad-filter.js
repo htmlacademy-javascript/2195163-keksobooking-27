@@ -1,11 +1,11 @@
+const UNDEFINED = 'any';
+
 const filterForm = document.querySelector('.map__filters');
 const typeFilter = document.querySelector('#housing-type');
 const priceFilter = document.querySelector('#housing-price');
 const roomsFilter = document.querySelector('#housing-rooms');
 const guestsFilter = document.querySelector('#housing-guests');
 const featuresFilter = document.querySelector('#housing-features');
-
-const UNDEFINED = 'any';
 
 const priceFilterRange = {
   'low': {

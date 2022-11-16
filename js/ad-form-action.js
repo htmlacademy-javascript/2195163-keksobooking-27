@@ -1,4 +1,3 @@
-
 import {initSlider} from './slider.js';
 import {validateForm, resetValidation} from './validate-ad-form.js';
 import {activateAdForm} from './forms-states.js';
@@ -35,8 +34,8 @@ const onTypeSelectChange = () => trackPrice();
 
 const onPriceInputInput = () => trackPrice();
 
-const onTimeInItemChange = () => timeoutItem.value = timeInItem.value;
-const onTimeOutItemChange = () => timeInItem.value = timeoutItem.value;
+const onTimeInItemChange = () => {timeoutItem.value = timeInItem.value;};
+const onTimeOutItemChange = () => {timeInItem.value = timeoutItem.value;};
 
 const resetApp = () => {
   clearImageBlocks();

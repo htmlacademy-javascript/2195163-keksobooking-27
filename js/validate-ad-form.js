@@ -4,6 +4,7 @@ const roomNumberSelect = document.querySelector('#room_number');
 const priceInput = document.querySelector('#price');
 const typeSelect = document.querySelector('#type');
 
+
 const minPrice = {
   'bungalow': 0,
   'flat': 1000,
@@ -63,7 +64,6 @@ roomNumberSelect.addEventListener('change', onRoomNumberSelectChange);
 pristine.addValidator(priceInput, validatePrice, getPriceErrorMessage);
 pristine.addValidator(capacitySelect, validateCapacity, getCapacityErrorMessage);
 pristine.addValidator(roomNumberSelect, validateCapacity, getRoomNumberErrorMessage);
-
 
 const validateForm = () => pristine.validate();
 const resetValidation = () => pristine.reset();

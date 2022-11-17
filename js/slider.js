@@ -30,4 +30,4 @@ const initSlider = () => {
   addSliderListeners();
 };
 
-export {initSlider};
+export {initSlider, createSlider};

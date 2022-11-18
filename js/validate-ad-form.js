@@ -1,10 +1,10 @@
-const minPrice = {
-  bungalow: 0,
-  flat: 1000,
-  hotel: 3000,
-  house: 5000,
-  palace: 10000,
+const guestsToRooms = {
+  0: ['100'],
+  1: ['1', '2', '3'],
+  2: ['2', '3'],
+  3: ['3'],
 };
+
 const roomsToGuests = {
   1: ['1'],
   2: ['1', '2'],
@@ -12,11 +12,12 @@ const roomsToGuests = {
   100: ['0'],
 };
 
-const guestsToRooms = {
-  0: ['100'],
-  1: ['1', '2', '3'],
-  2: ['2', '3'],
-  3: ['3'],
+const minPrice = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
 };
 
 const adForm = document.querySelector('.ad-form');

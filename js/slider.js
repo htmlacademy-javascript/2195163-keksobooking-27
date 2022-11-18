@@ -18,7 +18,8 @@ const createSlider = () => {
 };
 
 const onSliderInputUpdate = () => (priceField.value = slider.noUiSlider.get());
-const onInputSliderChange = (evt) => slider.noUiSlider.set(evt.currentTarget.value);
+const onInputSliderChange = (evt) =>
+  slider.noUiSlider.set(evt.currentTarget.value);
 
 const addSliderListeners = () => {
   slider.noUiSlider.on('update', onSliderInputUpdate);
@@ -30,4 +31,4 @@ const initSlider = () => {
   addSliderListeners();
 };
 
-export {initSlider, createSlider};
+export { initSlider, createSlider };

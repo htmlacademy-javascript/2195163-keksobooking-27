@@ -1,10 +1,10 @@
-import {renderGetErrorMessage} from './error.js';
-import {getData} from './api.js';
-import {activateFiltersForm} from './forms-states.js';
-import {renderCard} from './render-card.js';
-import {setAdFormAction} from './ad-form-action.js';
-import {filterOffers, onFiltersChange} from './ad-filter.js';
-import {debounce} from './util.js';
+import { renderGetErrorMessage } from './error.js';
+import { getData } from './api.js';
+import { activateFiltersForm } from './forms-states.js';
+import { renderCard } from './render-card.js';
+import { setAdFormAction } from './ad-form-action.js';
+import { filterOffers, onFiltersChange } from './ad-filter.js';
+import { debounce } from './util.js';
 
 const START_LOCATION = {
   lat: 35.68172,
@@ -28,23 +28,23 @@ const setStartAddressValue = () => {
 
 const setLocation = (target) => {
   const location = target.getLatLng();
-  addressInput.value = `${location.lat.toFixed(DECIMALS)}, ${location.lng.toFixed(DECIMALS)}`;
+  addressInput.value = `${location.lat.toFixed(
+    DECIMALS
+  )}, ${location.lng.toFixed(DECIMALS)}`;
 };
 
 const addMarkerGroup = (data) => {
   markerGroup.addTo(interactiveMap);
-  data
-    .slice(0, OFFERS_COUNTER)
-    .forEach((offer) => {
-      marker = L.marker(offer.location, {
-        icon: L.icon({
-          iconUrl: './img/pin.svg',
-          iconSize: [40, 40],
-          iconAnchor: [20, 40],
-        }),
-      });
-      marker.addTo(markerGroup).bindPopup(renderCard(offer));
+  data.slice(0, OFFERS_COUNTER).forEach((offer) => {
+    marker = L.marker(offer.location, {
+      icon: L.icon({
+        iconUrl: './img/pin.svg',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+      }),
     });
+    marker.addTo(markerGroup).bindPopup(renderCard(offer));
+  });
 };
 
 const onMarkerMove = (evt) => setLocation(evt.target);
@@ -59,7 +59,6 @@ const onDataFailed = () => {
   activateFiltersForm(mapFormFieldsets, false);
 };
 
-
 const onDataLoad = (data) => {
   const filteredOffers = filterOffers(data);
   addMarkerGroup(filteredOffers.slice(0, OFFERS_COUNTER));
@@ -68,10 +67,12 @@ const onDataLoad = (data) => {
 const setFilteredMarkers = () => {
   getData((offers) => {
     onDataLoad(offers);
-    onFiltersChange(debounce(() => {
-      markerGroup.clearLayers();
-      onDataLoad(offers);
-    }));
+    onFiltersChange(
+      debounce(() => {
+        markerGroup.clearLayers();
+        onDataLoad(offers);
+      })
+    );
   }, onDataFailed);
 };
 
@@ -101,7 +102,8 @@ const initMap = () => {
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     foo: 'bar',
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(interactiveMap);
 
   interactiveMarker = L.marker(START_LOCATION, {
@@ -116,5 +118,4 @@ const initMap = () => {
   interactiveMarker.on('move', onMarkerMove);
 };
 
-
-export {initMap, setStartAddressValue, resetMap};
+export { initMap, setStartAddressValue, resetMap };

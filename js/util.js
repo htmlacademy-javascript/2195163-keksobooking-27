@@ -12,4 +12,4 @@ const debounce = (callback, timeoutDelay = 500) => {
   };
 };
 
-export {isEcsEvt, renderElement, debounce};
+export { isEcsEvt, renderElement, debounce };

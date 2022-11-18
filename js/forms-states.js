@@ -1,7 +1,8 @@
 const adForm = document.querySelector('.ad-form');
 const filtersForm = document.querySelector('.map__filters');
 const adFormInteractiveItems = adForm.querySelectorAll('fieldset');
-const filtersFormInteractiveItems = filtersForm.querySelectorAll('fieldset, select');
+const filtersFormInteractiveItems =
+  filtersForm.querySelectorAll('fieldset, select');
 
 const deactivateAdForm = () => {
   adForm.classList.add('ad-form--disabled');
@@ -28,4 +29,4 @@ const deactivateForms = () => {
   deactivateFiltersForm();
 };
 
-export {deactivateForms, activateAdForm, activateFiltersForm};
+export { deactivateForms, activateAdForm, activateFiltersForm };

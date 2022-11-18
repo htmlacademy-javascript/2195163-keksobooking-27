@@ -1,11 +1,19 @@
-import {initSlider} from './slider.js';
-import {validateForm, resetValidation} from './validate-ad-form.js';
-import {activateAdForm} from './forms-states.js';
-import {clearImageBlocks, addPhotoInputsListeners} from './preload-images.js';
-import {setStartAddressValue, resetMap} from './map.js';
-import {sendData} from './api.js';
-import {renderSuccessMessage} from './success.js';
-import {renderPostErrorMessage} from './error.js';
+import { initSlider } from './slider.js';
+import { validateForm, resetValidation } from './validate-ad-form.js';
+import { activateAdForm } from './forms-states.js';
+import { clearImageBlocks, addPhotoInputsListeners } from './preload-images.js';
+import { setStartAddressValue, resetMap } from './map.js';
+import { sendData } from './api.js';
+import { renderSuccessMessage } from './success.js';
+import { renderPostErrorMessage } from './error.js';
+
+const minPrice = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
+};
 
 const adForm = document.querySelector('.ad-form');
 const filterForm = document.querySelector('.map__filters');
@@ -16,26 +24,24 @@ const typeSelect = document.querySelector('#type');
 const slider = document.querySelector('.ad-form__slider');
 const submitButton = document.querySelector('.ad-form__submit');
 
-const minPrice = {
-  'bungalow': 0,
-  'flat': 1000,
-  'hotel': 3000,
-  'house': 5000,
-  'palace': 10000,
-};
-
 const trackPrice = () => {
   priceInput.placeholder = minPrice[typeSelect.value];
   priceInput.min = minPrice[typeSelect.value];
-  priceInput.dataset.pristineMinMessage = `минимальное значение ${minPrice[typeSelect.value]}`;
+  priceInput.dataset.pristineMinMessage = `минимальное значение ${
+    minPrice[typeSelect.value]
+  }`;
 };
 
 const onTypeSelectChange = () => trackPrice();
 
 const onPriceInputInput = () => trackPrice();
 
-const onTimeInItemChange = () => {timeoutItem.value = timeInItem.value;};
-const onTimeOutItemChange = () => {timeInItem.value = timeoutItem.value;};
+const onTimeInItemChange = () => {
+  timeoutItem.value = timeInItem.value;
+};
+const onTimeOutItemChange = () => {
+  timeInItem.value = timeoutItem.value;
+};
 
 const resetApp = () => {
   clearImageBlocks();
@@ -72,6 +78,8 @@ const onAddFormSubmit = (evt) => {
 };
 
 const onAddFormReset = () => {
+  const customEvent = new CustomEvent('change');
+  filterForm.dispatchEvent(customEvent);
   resetApp();
   filterForm.reset();
 };
@@ -92,4 +100,4 @@ const setAdFormAction = () => {
   initSlider();
 };
 
-export {setAdFormAction};
+export { setAdFormAction };

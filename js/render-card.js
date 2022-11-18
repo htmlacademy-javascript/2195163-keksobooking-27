@@ -1,11 +1,13 @@
-const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-
 const TypeToName = {
   bungalow: 'Бунгало',
   flat: 'Квартира',
   house: 'Дом',
   palace: 'Дворец',
 };
+
+const cardTemplate = document
+  .querySelector('#card')
+  .content.querySelector('.popup');
 
 const renderTextBlock = (parent, cssClass, data, additionalText = '') => {
   const element = parent.querySelector(cssClass);
@@ -86,11 +88,24 @@ const createCardTemplate = (data) => {
   const cardElement = cardTemplate.cloneNode(true);
   renderTextBlock(cardElement, '.popup__title', data.offer.title);
   renderTextBlock(cardElement, '.popup__text--address', data.offer.address);
-  renderTextBlock(cardElement, '.popup__text--price', data.offer.price, ' ₽/ночь');
+  renderTextBlock(
+    cardElement,
+    '.popup__text--price',
+    data.offer.price,
+    ' ₽/ночь'
+  );
   renderTextBlock(cardElement, '.popup__type', TypeToName[data.offer.type]);
   renderTextBlock(cardElement, '.popup__description', data.offer.description);
-  renderTextBlock(cardElement, '.popup__text--capacity', createCapacityText(data.offer));
-  renderTextBlock(cardElement, '.popup__text--time', createTimeText(data.offer));
+  renderTextBlock(
+    cardElement,
+    '.popup__text--capacity',
+    createCapacityText(data.offer)
+  );
+  renderTextBlock(
+    cardElement,
+    '.popup__text--time',
+    createTimeText(data.offer)
+  );
   renderAvatarBlock(cardElement, '.popup__avatar', data.author.avatar);
   renderPhotoBlock(cardElement, '.popup__photos', data.offer.photos);
   renderFeaturesBlock(cardElement, '.popup__features', data.offer.features);
@@ -100,5 +115,4 @@ const createCardTemplate = (data) => {
 
 const renderCard = (data) => createCardTemplate(data);
 
-export {renderCard};
-
+export { renderCard };

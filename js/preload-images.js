@@ -49,4 +49,4 @@ const addPhotoInputsListeners = () => {
   photoInput.addEventListener('change', onPhotoInputsChange);
 };
 
-export {clearImageBlocks, addPhotoInputsListeners};
+export { clearImageBlocks, addPhotoInputsListeners };
